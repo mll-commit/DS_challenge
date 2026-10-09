@@ -28,7 +28,15 @@ All required packages, **including development dependencies**, are already decla
 uv sync
 ```
 
-This prepares `.venv` and installs the project dependencies, including the tools needed to run the notebooks. No separate package installation is required. Keep `pyproject.toml` and `uv.lock` for reproducibility. You do not need to activate `.venv` manually when using `uv run`.
+This prepares `.venv` and installs the project dependencies, including `ipykernel`. Keep `pyproject.toml` and `uv.lock` for reproducibility. You do not need to activate `.venv` manually when using `uv run`.
+
+Register the environment as a Jupyter kernel once on each machine:
+
+```powershell
+uv run python -m ipykernel install --user --name stm-challenge --display-name "Python (STM challenge)"
+```
+
+This creates a user-level kernelspec that VS Code and JupyterLab can discover. If you move the project to a different path, run this command again to refresh the kernelspec.
 
 ### Configure the data paths
 
@@ -49,7 +57,7 @@ The supplied files contain **delimited text**, even when their extension is `.xl
 uv run jupyter lab
 ```
 
-Open **`notebooks/STM_Data_Pipeline.ipynb`**, select the project environment's kernel, and run the cells in order. Starting Jupyter does not automatically execute notebook cells. See the [uv and Jupyter guide](https://docs.astral.sh/uv/guides/integration/jupyter/).
+Open **`notebooks/STM_Data_Pipeline.ipynb`**, select **Python (STM challenge)** as the kernel, and run the cells in order. Starting Jupyter does not automatically execute notebook cells. See the [uv and Jupyter guide](https://docs.astral.sh/uv/guides/integration/jupyter/).
 
 Warnings are suppressed at the start of the notebook for readability. Explicit checks remain in place; temporarily disable suppression when investigating errors or convergence issues.
 
